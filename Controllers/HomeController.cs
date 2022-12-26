@@ -35,11 +35,61 @@ namespace Bio.Controllers
         }
 
         [HttpPost]
-        public ActionResult Yeni(Orders ord)
+        public ActionResult Yeni(Orders order)
         {
-            db.Orders.Add(ord); 
+            if (order.OrderID == 0) //for insert
+            {
+                db.Orders.Add(order);
+            }
+            else
+            {
+                var updateData=db.Orders.Find(order.OrderID);
+                if(updateData==null)
+                {
+                    return HttpNotFound();
+                }
+                updateData.ShipName = order.ShipName;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index","Home");
         }
+
+        public ActionResult Update(int id)
+        {
+            var model = db.Orders.Find(id);
+           if (model==null)
+            {
+                return HttpNotFound();
+
+            }
+            return View("Yeni", model);
+
+        }
+        public ActionResult Delete(int id)
+        {
+            var delete = db.Orders.Find(id);
+            if (delete == null)
+            {
+
+                return HttpNotFound();
+            }
+            db.Orders.Remove(delete);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
+    //public ActionResult Delete(int id)
+    //{
+    //    var delete = DB.ToDoLists.Find(id);
+    //    if (delete == null)
+    //    {
+
+    //        return HttpNotFound();
+    //    }
+    //    DB.ToDoLists.Remove(delete);
+    //    DB.SaveChanges();
+    //    return RedirectToAction("Index", "Home");
+    //}
 }

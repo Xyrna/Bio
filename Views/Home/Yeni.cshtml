@@ -1,4 +1,4 @@
-﻿
+﻿@model Bio.Models.EntityFramework.Orders
 @{
     ViewBag.Title = "Yeni";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,12 +7,22 @@
 <div class="container">
     <h2>Yeni</h2>
 
-    <form method="post">
-        <div class="form-group mb-3">
-            <label>Yeni istifadeci adi</label>
-            <input type="text" name="OrderID" class="form-control" />
+    @*<form method="post">
+            <div class="form-group mb-3">
+                <label>Yeni istifadeci adi</label>
+                <input type="text" name="ShipName" class="form-control" />
 
-        </div>
-        <button type="submit" class="btn btn-success">Elave et</button>
-    </form>
+            </div>
+            <button type="submit" class="btn btn-success">Elave et</button>
+        </form>*@
+
 </div>
+@using (Html.BeginForm("Yeni", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.ShipName)
+        @Html.TextBoxFor(m => m.ShipName, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m=>m.OrderID)
+    <button type="submit" class="btn btn-success">Qeyd Et</button>
+}

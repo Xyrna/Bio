@@ -12,6 +12,9 @@
         <tr>
             <th>ID</th>
             <th>Ad</th>
+            <th>Yenile</th>
+            <th>Sil</th>
+
         </tr>
 
     </thead>
@@ -22,6 +25,8 @@
             <tr>
                 <td>@item.OrderID</td>
                 <td>@item.ShipName</td>
+                <td> <a class="btn btn-primary" href="/Home/Update/@item.OrderID">Duzelis et</a></td>
+                <td> <a class="btn btn-warning" href="/Home/Delete/@item.OrderID">Sil</a></td>
 
 
             </tr>
